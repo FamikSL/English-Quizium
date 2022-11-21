@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Тесты из категории:" %} {{ category.category }}{% endblock %}
+
+{% block content %}
+<h1>{% trans "Тестов" %} {% trans "категории" %} <strong>{{ category.category }} </strong></h1>
+
+  {% with object_list as quizzes %}
+    {% if quizzes %}
+        <ul>
+        {% for quiz in quizzes %}
+            <li>
+			  <a href="{% url 'quiz_question' quiz_name=quiz.url %}">
+				{{ quiz.title }}
+			  </a>
+			</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>{% trans "Тестов нет" %}</p>
+    {% endif %}
+  {% endwith %}
+{% endblock %}
