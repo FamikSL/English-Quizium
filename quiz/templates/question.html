@@ -18,10 +18,10 @@
   {% else %}
 	<div class="alert alert-warning">
   {% endif %}
-  	  <p><small>
-		{% trans "Ваш ответ" %} </small>
+  	  <p>
+		{% trans "Вы ответили" %}
 		<strong>
-		  {{ previous.previous_outcome|yesno:"correct,incorrect" }}
+		  {{ previous.previous_outcome|yesno:"правильно,неправльно" }}
 		</strong>
 	  </p>
 

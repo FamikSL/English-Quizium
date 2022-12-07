@@ -11,7 +11,25 @@ from .models import Quiz, Category, Progress, Sitting, Question
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.views import View
+from django.http import JsonResponse
 
+class LoginAjaxView(View):
+    def post(self, request):
+        print(request)
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                
+                return JsonResponse(data ={}, status ='201')
+            else:
+                
+                return JsonResponse(data ={'error': 'Неверный логин или  пароль'}, status ='400')
+        else:
+            return JsonResponse(data ={'error': 'Введите логин и пароль'}, status ='400')
 
 class QuizMarkerMixin(object):
     @method_decorator(login_required)
@@ -234,12 +252,12 @@ class QuizTake(FormView):
 
         return render(self.request, 'result.html', results)
 
-
-
-
 def index(request):
     return render(request, 'index.html', {})
 
+def register_user(request):
+    context ={}
+    return render(request, 'register.html', {})
 
 def login_user(request):
 

@@ -1,12 +1,14 @@
 from django.conf.urls import url
 from .views import QuizListView, CategoriesListView,\
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList,\
-    QuizMarkingDetail, QuizDetailView, QuizTake, index, login_user, logout_user
+    QuizMarkingDetail, QuizDetailView, LoginAjaxView, QuizTake, index, login_user, logout_user, register_user
 from django.urls import path
 
 
 urlpatterns = [         url(regex=r'^$', view=index, name='index'),
                         url(regex=r'^login/$', view=login_user, name='login'),
+                        url(regex=r'^login_ajax/$', view=LoginAjaxView.as_view(), name='login_ajax'),
+                        url(regex=r'^register/$', view=register_user, name='register'),
                         url(regex=r'^logout/$', view=logout_user, name='logout'),
                        url(regex=r'^quizzes/$',
                            view=QuizListView.as_view(),
